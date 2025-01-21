@@ -1,0 +1,54 @@
+import yfinance as yf
+import pandas as pd
+import json
+import matplotlib.pyplot as plt
+
+apple = yf.Ticker("AAPL")
+
+
+apple_json='/Users/fasuncion/Desktop/Python coursera/project/apple.json'
+
+with open(apple_json) as apple_file:
+    apple_info = json.load(apple_file)
+apple_info
+
+#print(apple_info)
+#print(apple_info['country'])
+
+apple_share_price_data = apple.history(period="max")
+#print(apple_share_price_data)
+#print(apple_share_price_data.head())
+
+apple_share_price_data.reset_index(inplace=True)
+
+#apple_share_price_data.plot(x="Date", y="Close")
+#plt.show()
+
+
+dividends = apple.dividends
+#print(dividends)
+
+#dividends.plot(title="Apple Dividends Over Time")
+#plt.xlabel("Date")
+#plt.ylabel("Dividends")
+#plt.show()
+
+amd = yf.Ticker('AMD')
+print(amd)
+
+amd_json = '/Users/fasuncion/Desktop/Python coursera/project/amd.json'
+with open(amd_json) as amd_file:
+    amd_info=json.load(amd_file)
+amd_info
+
+print(amd_info['country'])
+print(amd_info['sector'])
+
+amd_share_price_data = amd.history(period="1d", interval = '1h')
+print(amd_share_price_data)
+
+
+amd_share_price_data.plot(title="AMD Share Price Over Time")
+plt.xlabel("Datetime")
+plt.ylabel("Close")
+plt.show()
